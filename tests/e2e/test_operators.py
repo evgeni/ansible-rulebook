@@ -602,7 +602,8 @@ def test_select_operator():
     rulebook = (
         utils.BASE_DATA_PATH / "rulebooks/operators/test_select_operator.yml"
     )
-    cmd = utils.Command(rulebook=rulebook)
+    vars_file = utils.BASE_DATA_PATH / "extra_vars/operator_variables.yml"
+    cmd = utils.Command(rulebook=rulebook, vars_file=vars_file)
 
     LOGGER.info(f"Running command: {cmd}")
     result = subprocess.run(

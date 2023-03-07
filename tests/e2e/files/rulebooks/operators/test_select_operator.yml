@@ -93,10 +93,10 @@
 
     - name: Multi condition select with negation
       condition: >
-        event.type is not select("match", "planet") and
-        (event.radius is select("==", 11) or
-        event.orbital_period is select(">=", 27000.123)) and
-        event.has_moons is not select("==", true)
+        event.type is not select("match", vars.halleys_type) and
+        (event.radius is select("==", vars.halleys_radius) or
+        event.orbital_period is select(">=", vars.halleys_min_op)) and
+        event.has_moons is not select("==", vars.halleys_moons)
       action:
         debug:
           msg: "Output for testcase #05"
