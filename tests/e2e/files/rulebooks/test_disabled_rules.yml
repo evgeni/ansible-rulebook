@@ -42,7 +42,7 @@
   hosts: all
   sources:
     - generic:
-        startup_delay: 30  # never start, only triggered by Ruleset 1
+        startup_delay: "{{ DEFAULT_STARTUP_DELAY }}"  # never start, only triggered by Ruleset 1
 
   rules:
     - name: Disabled rule (from post_event)

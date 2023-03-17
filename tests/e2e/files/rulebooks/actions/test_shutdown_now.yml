@@ -30,7 +30,7 @@
   hosts: all
   sources:
     - generic:
-        startup_delay: "{{ DEFAULT_STARTUP_DELAY }}"
+        startup_delay: "{{ SHUTDOWN_NOW_STARTUP_DELAY }}"
         payload:
           - action: "trigger_shutdown"
 

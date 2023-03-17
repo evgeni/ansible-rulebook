@@ -17,6 +17,7 @@ DEFAULT_CMD_TIMEOUT = SETTINGS["cmd_timeout"]
 DEFAULT_SHUTDOWN_AFTER = SETTINGS["default_shutdown_after"]
 DEFAULT_EVENT_DELAY = SETTINGS["default_event_delay"]
 DEFAULT_STARTUP_DELAY = SETTINGS["default_startup_delay"]
+SHUTDOWN_NOW_STARTUP_DELAY = SETTINGS["shutdown_now_startup_delay"]
 
 
 @pytest.mark.e2e
@@ -161,10 +162,16 @@ def test_run_playbook(update_environment):
 
     rulebook = utils.BASE_DATA_PATH / "rulebooks/actions/test_run_playbook.yml"
     env = update_environment(
-        {"DEFAULT_SHUTDOWN_AFTER": str(DEFAULT_SHUTDOWN_AFTER)}
+        {
+            "DEFAULT_SHUTDOWN_AFTER": str(DEFAULT_SHUTDOWN_AFTER),
+            "DEFAULT_STARTUP_DELAY": str(DEFAULT_STARTUP_DELAY),
+        }
     )
 
-    cmd = utils.Command(rulebook=rulebook, envvars="DEFAULT_SHUTDOWN_AFTER")
+    cmd = utils.Command(
+        rulebook=rulebook,
+        envvars="DEFAULT_SHUTDOWN_AFTER,DEFAULT_STARTUP_DELAY",
+    )
 
     LOGGER.info(f"Running command: {cmd}")
     result = subprocess.run(
@@ -284,10 +291,12 @@ def test_shutdown_action_now(update_environment):
 
     rulebook = utils.BASE_DATA_PATH / "rulebooks/actions/test_shutdown_now.yml"
     env = update_environment(
-        {"DEFAULT_STARTUP_DELAY": str(DEFAULT_STARTUP_DELAY)}
+        {"SHUTDOWN_NOW_STARTUP_DELAY": str(SHUTDOWN_NOW_STARTUP_DELAY)}
     )
 
-    cmd = utils.Command(rulebook=rulebook, envvars="DEFAULT_STARTUP_DELAY")
+    cmd = utils.Command(
+        rulebook=rulebook, envvars="SHUTDOWN_NOW_STARTUP_DELAY"
+    )
 
     LOGGER.info(f"Running command: {cmd}")
     result = subprocess.run(
